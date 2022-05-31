@@ -8,6 +8,19 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous" />
 </head>
+<style>
+    main{
+        margin-top: 100px;
+    }
+    form{
+        display: flex;
+        flex-direction: column;
+        width: 500px;
+        place-content: center;
+        margin: auto;
+        margin-top: 100px;
+    }
+</style>
 <body>
     <header>
         <!-- NAVBAR -->
@@ -34,7 +47,59 @@
 
 </body>
 
+<main>
+    <section class="section1">
+        <form method="post" action="/regcliente_tienda">
+            <!-- Nombre input -->
+            <div class="form-outline mb-4">
+              <input type="text" id="form2Example1" class="form-control" name="cliente" />
+              <label class="form-label" for="form2Example1">Cliente</label>
+            </div>
+
+              <!-- Tienda input -->
+              <div class="form-outline mb-4">
+                <input type="text" id="form2Example2" class="form-control" name="tienda"/>
+                <label class="form-label" for="form2Example2">Tienda</label>
+              </div>
+
+
+               <!-- Submit button -->
+               <input type="submit" class="btn btn-primary" value="registrar" />
+            </div>
+          
+    </section>
+</main>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous">
     </script>
+
+<script>
+    var container = document.getElementById("section2"), test = {{ registrado | tojson }};
+
+for(var i = 0; i < test.length; i++){
+ //Creamos los el contenedor
+  var card = document.createElement('div');
+  card.setAttribute("class", "card");
+ //Creamos los elementos del registro
+
+  var nTienda = document.createElement('span');
+  nTienda.setAttribute("id", "ntienda");
+
+  var nCliente = document.createElement('span');
+  nCliente.setAttribute("id", "nCliente");
+
+  
+  //Creamos las variable de los datos de cada registro
+  var txtTienda = document.createTextNode(test[i].tienda);
+  var txtCliente = document.createTextNode(test[i].cliente);
+
+   nTienda.appendChild(txtTienda);
+   nCliente.appendChild(txtCliente);
+
+  card.appendChild(nTienda);
+  card.appendChild(nCliente);
+
+  container.appendChild(card);
+}
+</script>
 </html>
